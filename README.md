@@ -10,7 +10,7 @@ This Node.js approach demonstrates how to use AI to automate the process of buil
 Let's address each requirement:
 
 **1. Data Collection and Preprocessing:** (dataPreprocessing.js)
-For the purpose of illustration, we'll use a mini set of an open-source e-commerce dataset. The Amazon product review dataset is a good choice, as it's comprehensive and widely used in recommendation system research. We use csv-parser to handle and preprocess the data, addressing edge cases and missing data.
+To avoid exceeding the quota limit of the Recombee trial account, we'll use a mini mock-up of an open-source e-commerce dataset. The Amazon product review dataset is a good choice, as it's comprehensive and widely used in recommendation system research. We use csv-parser to handle and preprocess the data, addressing edge cases and missing data.
 
 **2. Model Development:** (recommendationModel.js)
 We leverage the recombee-api-node library for a robust recommendation engine, implementing a hybrid approach (collaborative and content-based filtering).

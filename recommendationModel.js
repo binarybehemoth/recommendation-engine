@@ -5,9 +5,12 @@ const client = new recombee.ApiClient('web-coding-center-dev', 'RmHLrwGIgh4sVHxZ
 
 class RecommendationModel {
   async addInteraction(userId, itemId, rating, timestamp) {
+    let wait = 100;
     try {
       console.log(`Adding interaction for user ${userId} and item ${itemId}`);
+      await new Promise(resolve => setTimeout(resolve, wait));
       await client.send(new rqs.AddRating(userId, itemId, rating, {timestamp}));
+      wait += 100;
     } catch (error) {
       console.error(`An error occurred while adding interaction for user ${userId} and item ${itemId}:`, error);
     }
@@ -20,14 +23,22 @@ class RecommendationModel {
         const uid = row[0];
         if (!all_users.includes(uid)) {
             if (!uid) continue;
-            await client.send(new rqs.AddUser(uid));
-            all_users.push(uid);
+            try{
+              await client.send(new rqs.AddUser(uid));
+              all_users.push(uid);
+            }catch(error){
+              console.error(`An error occurred while adding user ${uid}:`, error);
+            }
         }
         const pid = row[1];
         if (!all_items.includes(pid)) {
             if (!pid) continue;
-            await client.send(new rqs.AddItem(pid));
-            all_items.push(pid);
+            try{
+              await client.send(new rqs.AddItem(pid));
+              all_items.push(pid);
+            } catch (error) {
+              console.error(`An error occurred while adding item ${pid}:`, error);
+            }
         }
     }
     const promises = trainData.filter(row=>(row[0] && row[1]))
@@ -41,7 +52,7 @@ class RecommendationModel {
   }
   
   async clearDatabase() {
-    console.log('Clearing database first, please wait 30 seconds...');
+    console.log('Clearing Recombee database first, please wait 30 seconds...');
     await client.send(new rqs.ResetDatabase());
     await new Promise (resolve => setTimeout(resolve, 30000));
   }
