@@ -14,7 +14,7 @@ function loadAndPreprocessData(inputFile) {
         const interactionKey = `${data.user_id}_${data.product_id}_${data.rating}_${data.timestamp}`;
         
         // Check if the interaction is unique
-        if (!uniqueInteractions.has(interactionKey)) {
+        if (!uniqueInteractions.has(interactionKey) && data.user_id && data.product_id && data.rating) {
           uniqueInteractions.add(interactionKey);
           data.rating = parseFloat(data.rating)/2.5+-1;  // recombee expects ratings between -1 and 1
           results.push(data);
