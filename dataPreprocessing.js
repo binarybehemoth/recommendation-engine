@@ -16,14 +16,14 @@ function loadAndPreprocessData(inputFile) {
         // Check if the interaction is unique
         if (!uniqueInteractions.has(interactionKey)) {
           uniqueInteractions.add(interactionKey);
-          data.rating = parseFloat(data.rating)/2.5+-1;
+          data.rating = parseFloat(data.rating)/2.5+-1;  // recombee expects ratings between -1 and 1
           results.push(data);
         }
       })
       .on('end', () => {
         results = results.map(e=>Object.values(e));
         results.pop();  // Remove the last empty row
-        const splitIndex = Math.floor(results.length * 0.8);
+        const splitIndex = Math.floor(results.length * 0.8);  // 80% train, 20% test
         resolve({train:results.slice(0, splitIndex), test:results.slice(splitIndex)});
       });
   })
