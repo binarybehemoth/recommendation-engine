@@ -11,7 +11,7 @@ function loadAndPreprocessData(inputFile) {
       .pipe(csv())
       .on('data', (data) => {
         // Create a unique key for each interaction
-        const interactionKey = `${data.user_id}_${data.product_id}_${data.rating}_${data.timestamp}`;
+        const interactionKey = `${data.user_id}_${data.product_id}`;
         
         // Check if the interaction is unique
         if (!uniqueInteractions.has(interactionKey) && data.user_id && data.product_id && data.rating) {
