@@ -1,6 +1,10 @@
 # recommendation-engine
 An AI-powered recommendation engine for an e-commerce site.
 
+To install:  npm run install
+
+To test: npm run test
+
 This Node.js approach demonstrates how to use AI to automate the process of building, deploying, and optimizing a recommendation engine in a JavaScript environment. It showcases data handling, model development, scalability considerations, and continuous improvement strategies.
 
 Let's address each requirement:
